@@ -34,16 +34,18 @@ Each citation has a unique key (`WebsiteCiteKey`) that can be called upon anywhe
 # Getting Started
 
 ## Prerequisites
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white)  ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+
 LaTeX Citation Manager is built in C/C++ using Visual Studio 2022 Community Edition.
 - **OS**: This program is only compatible with Windows. Windows 10/11 is recommended
 - **Compiler**: Visual Studio 2022 is recommended, since there are calls to Microsoft's safe functions in this code.
 
 ## Dependencies
-- **vcpkg** with the following libraries:
-	- [libcurl](https://everything.curl.dev/install/windows/win-vcpkg.html)
-	- [libxml2](https://vcpkg.io/en/package/libxml2.html)
-	- [json-c](https://github.com/json-c/json-c?tab=readme-ov-file#buildvcpkg)
-
+- **vcpkg**:
+	- [libcurl](https://everything.curl.dev/install/windows/win-vcpkg.html) ![Vcpkg Version](https://img.shields.io/vcpkg/v/curl)
+	- [libxml2](https://vcpkg.io/en/package/libxml2.html) ![Vcpkg Version](https://img.shields.io/vcpkg/v/libxml2)
+	- [json-c](https://github.com/json-c/json-c?tab=readme-ov-file#buildvcpkg) ![Vcpkg Version](https://img.shields.io/vcpkg/v/json-c)
+  
 ## Installation
 1. Ensure vcpkg is installed. See [Installing vcpkg on Windows](https://www.studyplan.dev/pro-cpp/vcpkg-windows) for an easy guide.
 2. Install `libcurl`, `libxml2`, and `json-c` packages.
