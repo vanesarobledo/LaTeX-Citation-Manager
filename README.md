@@ -1,5 +1,3 @@
-![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white) ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) 
-
 # About LaTeX Citation Manager
 LaTeX Citation Manager is a command-line based tool designed to organize bibliographies and generate BibLaTeX files for use in [LaTeX](https://www.latex-project.org/) documents.
 
@@ -124,8 +122,8 @@ Vanesa Robledo - vanesa@robledo.ca
 **Project Link**: https://github.com/vanesarobledo/LaTeX-Citation-Manager/
 
 # Acknowledgements
-- Madhan Chandrasekaran - the instructor for SENG1050 Data Structures
+- Madhan Chandrasekaran - the instructor for SENG1050 Data Structures, for teaching the how to implement these underlying data structures in C
 - [djb2 Function](https://theartincode.stanis.me/008-djb2/), with ideas for modification taken from [\[PSET5\] djb2 Hash Function](https://www.reddit.com/r/cs50/comments/ggvgvm/pset5_djb2_hash_function/) thread on Reddit for the hashing function for the hash table
-- [Web Scraping with C in 2025 on Zenrows][https://www.zenrows.com/blog/web-scraping-c], where the majority of the web scraping code comes from
+- [Web Scraping with C in 2025 on Zenrows](https://www.zenrows.com/blog/web-scraping-c), where the majority of the web scraping code comes from
 - [Web Scraping with C on scrape.do](https://scrape.do/blog/web-scraping-with-c/), where some of the web scraping code comes from
-- [Json-c Tutorial Index](https://github.com/rbtylee/tutorial-jsonc/blob/master/tutorial/index.md) 
+- [Json-c Tutorial Index](https://github.com/rbtylee/tutorial-jsonc/blob/master/tutorial/index.md), for help with extracing information from a JSON file
