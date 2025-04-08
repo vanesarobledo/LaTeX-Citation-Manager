@@ -1,9 +1,11 @@
+![Visual Studio](https://img.shields.io/badge/Visual%20Studio-5C2D91.svg?style=for-the-badge&logo=visual-studio&logoColor=white) ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) 
+
 # About LaTeX Citation Manager
 LaTeX Citation Manager is a command-line based tool designed to organize bibliographies and generate BibLaTeX files for use in [LaTeX](https://www.latex-project.org/) documents.
 
 The current iteration supports website citations. A text file of line-separated URLs can be imported, or manually entered in the command line. The program will prompt for data that can be added for a website citation. Once the citations have been processed, they can be exported into a `.bib` file that can be directly added to a LaTeX document for use in citations.
 
-This was submitted as my final project for SENG1050: Data Structures at Conestoga College in April 2025.
+This is a version my final project for [SENG1050: Data Structures at Conestoga College](https://github.com.mcas.ms/vanesarobledo/SENG1050-Final-Project). This version includes web scraping in C.
 
 ## What is LaTeX?
 **LaTeX** is a document typesetting method analogous to other markup languages such as HTML and Markdown. It is the standard for scientific publishing. LaTeX allows researchers to focus on the content of the papers and adjusting the formatting later, including citation style.
@@ -36,11 +38,21 @@ Each citation has a unique key (`WebsiteCiteKey`) that can be called upon anywhe
 ## Prerequisites
 LaTeX Citation Manager is built in C/C++ using Visual Studio 2022 Community Edition.
 - **OS**: This program is only compatible with Windows. Windows 10/11 is recommended
-- **Compiler**: Visual Studio 2022 is recommended, since there are calls to Microsoft's safe functions in this code
+- **Compiler**: Visual Studio 2022 is recommended, since there are calls to Microsoft's safe functions in this code.
+
+## Dependencies
+- **vcpkg** with the following libraries:
+	- [libcurl](https://everything.curl.dev/install/windows/win-vcpkg.html)
+	- [libxml2](https://vcpkg.io/en/package/libxml2.html)
+	- [json-c](https://github.com/json-c/json-c?tab=readme-ov-file#buildvcpkg)
+
 ## Installation
-1. Open the solution file using Visual Studio.
-2. Click on "Local Windows Debugger" to run the program in debug mode.
-3. Or: Create a `.exe` by right-clicking on the solution and click on "Build Solution" to compile the code.
+1. Ensure vcpkg is installed. See [Installing vcpkg on Windows](https://www.studyplan.dev/pro-cpp/vcpkg-windows) for an easy guide.
+2. Install `libcurl`, `libxml2`, and `json-c` packages.
+3. Open the solution file using Visual Studio.
+4. Click on "Local Windows Debugger" to run the program in debug mode.
+5. Or: Create a `.exe` by right-clicking on the solution and click on "Build Solution" to compile the code.
+   
 # Usage
 
 ## Quick Import & Export
@@ -53,6 +65,9 @@ Run the following command in the folder containing the `.exe` (contained in the 
 ```
 
 This will automatically create `references.bib` in the same directory as the `.exe`.
+
+To try the experimental web scraping feature, change the flag to "-w" instead. Note that not all data will be retrieved.
+
 ## Importing Citations
 1. To import website citations, create a text-based file with all of the website URLs, separated by line, and place them in the same directory as the `.exe`, or copy its path.
 2. Select '0' in the main console interface, and then type the name of the file or its path.
@@ -81,7 +96,9 @@ This will automatically create `references.bib` in the same directory as the `.e
 		- Author
 		- Title
 		- Website URL
-	3. **Finish processing all citations**: Once you have finished adding data to your citations and/or have sorted them, you can select this option to make it ready for exporting to a file.
+	3. **Attempt web scraping for all citations**: This option will attempt to scrape the web for citation data. Not every field will be filled, but some data may be found automatically.
+	4. **Finish processing all citations**: Once you have finished adding data to your citations and/or have sorted them, you can select this option to make it ready for exporting to a file.
+ 	5. **Cancel processing citations**: This will exit the menu for processing citations, and they will not be ready to be exported to a file. 
 3. All the processed citations will print to the screen once all data has been added or sorted. Note that the alphabetical sort will display the list of citations in reverse-alphabetical order - once it exports to a file, it will be in alphabetical order.
 ## Exporting Citations
 1. To export processed citations, select '5' in the main console interface.
@@ -104,8 +121,11 @@ There are many ways to display bibliographies using LaTeX, so I suggest reading 
 # Contact
 Vanesa Robledo - vanesa@robledo.ca
 
-**Project Link**: <https://github.com.mcas.ms/vanesarobledo/SENG1050-Final-Project>
+**Project Link**: https://github.com/vanesarobledo/LaTeX-Citation-Manager/
 
 # Acknowledgements
 - Madhan Chandrasekaran - the instructor for SENG1050 Data Structures
-- [djb2 Function](https://theartincode.stanis.me/008-djb2/), with ideas for modification taken from [\[PSET5\] djb2 Hash Function](https://www.reddit.com/r/cs50/comments/ggvgvm/pset5_djb2_hash_function/) thread on Reddit
+- [djb2 Function](https://theartincode.stanis.me/008-djb2/), with ideas for modification taken from [\[PSET5\] djb2 Hash Function](https://www.reddit.com/r/cs50/comments/ggvgvm/pset5_djb2_hash_function/) thread on Reddit for the hashing function for the hash table
+- [Web Scraping with C in 2025 on Zenrows][https://www.zenrows.com/blog/web-scraping-c], where the majority of the web scraping code comes from
+- [Web Scraping with C on scrape.do](https://scrape.do/blog/web-scraping-with-c/), where some of the web scraping code comes from
+- [Json-c Tutorial Index](https://github.com/rbtylee/tutorial-jsonc/blob/master/tutorial/index.md) 
