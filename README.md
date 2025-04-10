@@ -124,7 +124,6 @@ Vanesa Robledo - vanesa@robledo.ca
 **Project Link**: https://github.com/vanesarobledo/LaTeX-Citation-Manager/
 
 # Acknowledgements
-- Madhan Chandrasekaran - the instructor for SENG1050 Data Structures, for teaching the how to implement these underlying data structures in C
 - [djb2 Function](https://theartincode.stanis.me/008-djb2/), with ideas for modification taken from [\[PSET5\] djb2 Hash Function](https://www.reddit.com/r/cs50/comments/ggvgvm/pset5_djb2_hash_function/) thread on Reddit for the hashing function for the hash table
 - [Web Scraping with C in 2025 on Zenrows](https://www.zenrows.com/blog/web-scraping-c), where the majority of the web scraping code comes from
 - [Web Scraping with C on scrape.do](https://scrape.do/blog/web-scraping-with-c/), where some of the web scraping code comes from
