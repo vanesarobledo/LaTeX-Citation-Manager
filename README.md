@@ -3,7 +3,7 @@ LaTeX Citation Manager is a command-line based tool designed to organize bibliog
 
 The current iteration supports website citations. A text file of line-separated URLs can be imported, or manually entered in the command line. The program will prompt for data that can be added for a website citation. Once the citations have been processed, they can be exported into a `.bib` file that can be directly added to a LaTeX document for use in citations.
 
-This is a version my final project for [SENG1050: Data Structures at Conestoga College](https://github.com.mcas.ms/vanesarobledo/SENG1050-Final-Project). This version includes web scraping in C.
+This was submitted as my final project for SENG1050: Data Structures.
 
 ## What is LaTeX?
 **LaTeX** is a document typesetting method analogous to other markup languages such as HTML and Markdown. It is the standard for scientific publishing. LaTeX allows researchers to focus on the content of the papers and adjusting the formatting later, including citation style.
