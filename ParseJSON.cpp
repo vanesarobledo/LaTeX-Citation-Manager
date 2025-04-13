@@ -1,6 +1,26 @@
+/*
+* FILE          : ParseJSON.cpp
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
+* PROGRAMMER    : Vanesa Robledo
+* FIRST VERSION : 2025-04-07
+* DESCRIPTION   : LaTeX Citation Manager is a console-based menu-driven application that allows users to import or add
+*				  website citations by URL. The application will prompt the user to enter information necessary to
+*				  complete each citation and allows the user to export their entire bibliography for a .tex file for
+*				  use in BibLaTeX.
+*				  This file contains the functions to parse JSON data that has been gathered from web scraping
+*/
+
 #include <json-c/json.h>
 #include "Citations.h"
 
+//
+// FUNCTION     : parseJSON
+// DESCRIPTION  : Reads JSON data - specifically Application/LD+ data from the web & assigns
+//				  it to a citation node
+// PARAMETERS   : char* json		 : JSON data to attempt to parse JSON data
+//				  Citation* citation :	Pointer to Citation node to store JSON data
+// RETURNS      : void
+//
 void parseJSON(char* json, Citation* citation) {
 	// Create root node of JSON object & exit if failure to create json_object
 	json_object* root = json_tokener_parse(json);
@@ -72,7 +92,6 @@ void parseJSON(char* json, Citation* citation) {
 			}
 		}
 
-
 		// Drill down to @graph node -> turn this into recursion for simplicity's sake
 		if (strcmp(key1, "@graph") == 0) {
 			json_object* graph = json_object_object_get(root, "@graph");
@@ -129,5 +148,6 @@ void parseJSON(char* json, Citation* citation) {
 		}
 	}
 
+	// Memory cleanup
 	json_object_put(root);
 }

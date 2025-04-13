@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Citations.cpp" />
-    <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Import.cpp" />

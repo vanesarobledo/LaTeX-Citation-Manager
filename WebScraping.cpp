@@ -1,6 +1,6 @@
 /*
 * FILE          : WebScraping.cpp
-* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager (working title)
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
 * PROGRAMMER    : Vanesa Robledo
 * FIRST VERSION : 2025-04-07
 * DESCRIPTION   : This file contains web scraping functions

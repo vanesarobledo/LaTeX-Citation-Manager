@@ -1,6 +1,6 @@
 /*
 * FILE          : Import.cpp
-* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager (working title)
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
 * PROGRAMMER    : Vanesa Robledo
 * FIRST VERSION : 2025-03-21
 * DESCRIPTION   : This file contains the main file import and storing data

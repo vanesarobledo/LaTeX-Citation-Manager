@@ -1,6 +1,6 @@
 /*
 * FILE          : Utilities.cpp
-* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager (working title)
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
 * PROGRAMMER    : Vanesa Robledo
 * FIRST VERSION : 2025-03-21
 * DESCRIPTION   : This file contains user input and console-output related functions
@@ -27,7 +27,7 @@
 //
 void header(void) {
 	printf("==================================================================\n");
-	printf("LaTeX Citation Manager (working title)\n");
+	printf("LaTeX Citation Manager\n");
 	printf("by: Vanesa Robledo\n");
 	printf("==================================================================\n");
 }

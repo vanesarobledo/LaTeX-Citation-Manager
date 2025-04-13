@@ -36,9 +36,6 @@
     <ClCompile Include="Stack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileIO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SortedLinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,9 +1,9 @@
 /*
 * FILE          : Queue.cpp
-* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager (working title)
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
 * PROGRAMMER    : Vanesa Robledo
 * FIRST VERSION : 2025-03-21
-* DESCRIPTION   : This file contains the queue functions needed for the LaTeX Citation Manager (working title)
+* DESCRIPTION   : This file contains the queue functions needed for the LaTeX Citation Manager
 */
 
 #include <stdio.h>

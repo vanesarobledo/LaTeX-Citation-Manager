@@ -1,6 +1,6 @@
 /*
-* FILE          : Main.c
-* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager (working title)
+* FILE          : Citations.cpp
+* PROJECT       : SENG1050 Final Project: LaTeX Citation Manager
 * PROGRAMMER    : Vanesa Robledo
 * FIRST VERSION : 2025-03-21
 * DESCRIPTION   : LaTeX Citation Manager is a console-based menu-driven application that allows users to import or add
