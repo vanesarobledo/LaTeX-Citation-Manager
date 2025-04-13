@@ -14,28 +14,35 @@
 #include "Citations.h"
 #include "WebScraping.h"
 
-/*
-* TITLE         : Web Scraping with C
-* AUTHOR        : Unknown
-* DATE          : June 1, 2024
-* VERSION       : 1.0
-* AVAILABIILTY  : https://www.zenrows.com/blog/web-scraping-c
-*/
+//
+// FUNCTION     : WebScraping
+// DESCRIPTION  : Takes a citation URL and attempts to scrape the web to fill data
+// PARAMETERS   : Citation* citaiton : Pointer to citation struct
+// RETURNS      : void
+//
 void WebScraping(Citation* citation) {
-    // initialize curl globally
-    curl_global_init(CURL_GLOBAL_ALL);
+    /*
+    * TITLE         : Web Scraping with C
+    * AUTHOR        : Zenrows
+    * DATE          : June 1, 2024
+    * VERSION       : 1.0
+    * AVAILABIILTY  : https://www.zenrows.com/blog/web-scraping-c
+    */
 
-    // initialize a CURL instance
+    // Initialize curl globally
+    curl_global_init(CURL_GLOBAL_ALL); 
+
+    // Initialize a CURL instance
     CURL* curl_handle = curl_easy_init();
 
-    // retrieve the HTML document of the target page
+    // Retrieve the HTML document of the target page
     struct CURLResponse response = GetRequest(curl_handle, citation->URL);
 
-    // parse the HTML document returned by the server
+    // Parse the HTML document returned by the server
     htmlDocPtr doc = htmlReadMemory(response.html, (unsigned long)response.size, NULL, NULL, HTML_PARSE_NOERROR);
     xmlXPathContextPtr context = xmlXPathNewContext(doc);
 
-    // get the HTML elements
+    // Get the HTML elements
 
     /*
     * TITLE         : Web Scraping with C
@@ -45,61 +52,71 @@ void WebScraping(Citation* citation) {
     * AVAILABIILTY  : https://scrape.do/blog/web-scraping-with-c/
     */
 
-    // Read Application JSON data
+    // Read Application/LD+ JSON data
     xmlChar* xpath = (xmlChar*)"//script[contains(@type, 'application/ld+json')]";
+    xmlXPathContextPtr xpathCtxtPtr = xmlXPathNewContext(doc);
+    xmlXPathObjectPtr xpathObjPtr = xmlXPathEvalExpression(xpath, xpathCtxtPtr);
+
+    bool dataRead = false; // Flag for if data was read from JSON data
+
     if (xpath != NULL) {
-        xmlXPathContextPtr xpathCtxtPtr = xmlXPathNewContext(doc);
-        xmlXPathObjectPtr xpathObjPtr = xmlXPathEvalExpression(xpath, xpathCtxtPtr);
-        if (xpathObjPtr->nodesetval->nodeTab == NULL) {
-            return;
-        }
-        xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
+        if (xpathObjPtr->nodesetval->nodeTab != NULL) {
+            xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
+            if (node != NULL) {
+                // Store JSON content in string
+                char* json = (char*)xmlNodeGetContent(node);
 
-        // Store content in string
-        char* json = (char*)xmlNodeGetContent(node);
+                // Parse the JSON to assign values
+                parseJSON(json, citation);
 
-        if (node != NULL) {
-            // Call reading JSON to assign values
-            parseJSON(json, citation);
-
-            // Free memory
-            xmlXPathFreeObject(xpathObjPtr);
-            xmlXPathFreeContext(xpathCtxtPtr);
-            xmlFreeDoc(doc);
-            xmlCleanupParser();
-        }
-
-        // If there is no application JSON, read other data
-        else {
-            // Get title
-            xmlChar* xpathTitle = (xmlChar*)"//title";
-            if (xpath != NULL) {
-                xmlXPathContextPtr xpathCtxtPtr = xmlXPathNewContext(doc);
-                xmlXPathObjectPtr xpathObjPtr = xmlXPathEvalExpression(xpathTitle, xpathCtxtPtr);
-                xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
-
-                // Store content in string
-                char* title = (char*)xmlNodeGetContent(node);
-                if (strcmp(title, "Just a moment...") != 0) {
-                    citation->Title = (char*)xmlNodeGetContent(node);
-                }
-
-                // Free memory
-                xmlXPathFreeObject(xpathObjPtr);
-                xmlXPathFreeContext(xpathCtxtPtr);
-                xmlFreeDoc(doc);
-                xmlCleanupParser();
+                // Set flag to true
+                dataRead = true;
             }
         }
-
     }
 
-    // cleanup the curl instance
+    // If there is no Application/LD+ data, read other data on the page
+    if (!dataRead) {
+        // Get title element
+        xmlChar* xpathTitle = (xmlChar*)"//title";
+
+        if (xpathTitle != NULL) {
+            xmlXPathContextPtr xpathCtxtPtr = xmlXPathNewContext(doc);
+            xmlXPathObjectPtr xpathObjPtr = xmlXPathEvalExpression(xpathTitle, xpathCtxtPtr);
+            xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
+
+            // Store title in string
+            char* title = (char*)xmlNodeGetContent(node);
+
+            // Store data if there is no Cloudflare or anti-bot detection
+            if (strcmp(title, "Just a moment...") != 0) {
+                citation->Title = (char*)xmlNodeGetContent(node);
+            }
+        }
+    }
+
+    // Memory Cleanup
+
+    // XML Data Cleanup
+    xmlXPathFreeObject(xpathObjPtr);
+    xmlXPathFreeContext(xpathCtxtPtr);
+    xmlFreeDoc(doc);
+    xmlCleanupParser();
+
+    // Cleanup the curl instance
     curl_easy_cleanup(curl_handle);
-    // cleanup the curl resources
+    
+    // Cleanup the curl resources
     curl_global_cleanup();
 }
 
+/*
+* TITLE         : Web Scraping with C
+* AUTHOR        : Fimber (Kasarachi) Elemuwa
+* DATE          : October 14, 2024
+* VERSION       : 1.0
+* AVAILABIILTY  : https://scrape.do/blog/web-scraping-with-c/
+*/
 
 static size_t WriteHTMLCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
