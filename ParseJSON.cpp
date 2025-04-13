@@ -30,8 +30,8 @@ void parseJSON(char* json, Citation* citation) {
 	}
 
 	// Initialize data
-	int arraySize = 0; // Size of array to iterate through in @graph
-	json_object* temp; // Store JSON object at each index in @graph
+	int arraySize = 0; // Size of array to iterate through
+	json_object* temp = NULL; // Store JSON object at each index
 
 	// Extract year
 	char* dateModified; // Store dateModified string

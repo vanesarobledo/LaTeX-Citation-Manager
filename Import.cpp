@@ -118,6 +118,7 @@ void InsertData(CitationManager* Citations, Queue* CitationsToProcess, const cha
 	if (InsertHashTable(Citations, newCitation)) {
 		Enqueue(CitationsToProcess, newCitation);
 	}
+	// If insertion into hash table is not successful, free citation node
 	else {
 		free(newCitation);
 	}
