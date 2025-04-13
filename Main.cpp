@@ -101,15 +101,19 @@ int main(int argc, char* argv[])
 
 		case EXIT: // Exit the program & free all allocated memory
 			running = false;
-			exitProgram(Citations, CitationsToProcess, ProcessedCitations, Head);
 			break;
 
 		default: // Invalid option
 			printf("Error: Invalid option. Please select an option from the menu.\n");
 			break;
 		}
-		pressEntertoContinue();
-		header();
+		// Press enter to continue
+		if (running) {
+			pressEntertoContinue();
+			header();
+		}
 	}
+	// Memory Cleanup
+	exitProgram(Citations, CitationsToProcess, ProcessedCitations, Head);
 	return 0;
 }
