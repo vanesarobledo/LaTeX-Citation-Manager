@@ -17,7 +17,7 @@
 // FUNCTION     : parseJSON
 // DESCRIPTION  : Reads JSON data - specifically Application/LD+ data from the web & assigns
 //				  it to a citation node
-// PARAMETERS   : char* json		 : JSON data to attempt to parse JSON data
+// PARAMETERS   : char* json		 :  JSON data to attempt to parse JSON data
 //				  Citation* citation :	Pointer to Citation node to store JSON data
 // RETURNS      : void
 //
@@ -36,7 +36,7 @@ void parseJSON(char* json, Citation* citation) {
 	// Extract year
 	char* dateModified; // Store dateModified string
 	char* extractedYear;
-	std::regex rgx("^(\\d{4})(?:.+)"); // regex to match year
+	std::regex rgx("^(\\d{4})(?:.+)"); // regex to match year in dateModified
 	std::cmatch match;
 	int year = 0;
 
@@ -50,6 +50,7 @@ void parseJSON(char* json, Citation* citation) {
 		// Extract author
 		if (strcmp(key1, "author") == 0) {
 			json_object* author = json_object_object_get(root, "author");
+
 			// If author is an array
 			if (json_object_is_type(author, json_type_array) == 1) {
 				arraySize = (int)json_object_array_length(author);
@@ -83,6 +84,7 @@ void parseJSON(char* json, Citation* citation) {
 				citation->Year = year;
 			}
 		}
+
 		if (strcmp(key1, "dateModified") == 0) { // Overwrite with modified year if available
 			dateModified = _strdup(json_object_get_string(val1));
 			if (std::regex_search(dateModified, match, rgx)) {
@@ -92,7 +94,7 @@ void parseJSON(char* json, Citation* citation) {
 			}
 		}
 
-		// Drill down to @graph node -> turn this into recursion for simplicity's sake
+		// Drill down to @graph node
 		if (strcmp(key1, "@graph") == 0) {
 			json_object* graph = json_object_object_get(root, "@graph");
 			
@@ -150,4 +152,7 @@ void parseJSON(char* json, Citation* citation) {
 
 	// Memory cleanup
 	json_object_put(root);
+	if (temp != NULL) {
+		json_object_put(temp);
+	}
 }
