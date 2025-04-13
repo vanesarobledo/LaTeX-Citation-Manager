@@ -67,7 +67,7 @@ void StoreFileData(FILE* file, CitationManager* Citations, Queue* CitationsToPro
 	char* readLine; // String to store line to add to node
 	int count = 0; // Count how many citations were added
 
-	while (fgets(buffer, LINE_SIZE, file) != NULL) {
+	while (fgets(buffer, LINE_SIZE, file) != NULL && count <= 100) {
 		// Stop reading file if some file error occurs
 		if (ferror(file)) {
 			printf("Error reading file.\n");
@@ -79,12 +79,14 @@ void StoreFileData(FILE* file, CitationManager* Citations, Queue* CitationsToPro
 			clearNewLineChar(buffer);
 			readLine = trimWhitespace(buffer);
 			// Validate input from file - read valid URLs
-			if (std::regex_match(buffer, std::regex("^https?:\\/\\/[A-za-z\\.0-9\\/_\\-\\:\\#\\[\\]\\@\\!\\$\\&\\'\\(\\)\\*\\+\\,\\;\\%\\=]+")) == true) {
+			if (std::regex_match(buffer, std::regex("^https?:\\/\\/[A-za-z\\.0-9\\/_\\-\\:\\#\\[\\]\\@\\!\\$\\&\\'\\(\\)\\*\\+\\,\\;\\%\\=\\?]+")) == true) {
 				strncpy(readLine, buffer, LINE_SIZE);
 				// Add data to data structures
 				InsertData(Citations, CitationsToProcess, readLine);
 				// Increment citation count
-				count++;
+				if (count < 100) {
+					count++;
+				}
 			}
 		}
 	}
