@@ -65,6 +65,7 @@ void StoreFileData(FILE* file, CitationManager* Citations, Queue* CitationsToPro
 
 	char buffer[LINE_SIZE] = ""; // String to store line from file
 	char* readLine; // String to store line to add to node
+	int count = 0; // Count how many citations were added
 
 	while (fgets(buffer, LINE_SIZE, file) != NULL) {
 		// Stop reading file if some file error occurs
@@ -82,6 +83,8 @@ void StoreFileData(FILE* file, CitationManager* Citations, Queue* CitationsToPro
 				strncpy(readLine, buffer, LINE_SIZE);
 				// Add data to data structures
 				InsertData(Citations, CitationsToProcess, readLine);
+				// Increment citation count
+				count++;
 			}
 		}
 	}
@@ -92,13 +95,12 @@ void StoreFileData(FILE* file, CitationManager* Citations, Queue* CitationsToPro
 		return;
 	}
 
-	// Print if data was loaded from file
-	if (Citations->Table != NULL) {
-		printf("Data successfully loaded from file.\n");
+	// Print that data has been stored
+	if (count > 0) {
+		printf("%d citations loaded from file.\n", count);
 	}
-	else
-	{
-		printf("No data loaded from file.\n\n");
+	else if (count == 0) {
+		printf("No data loaded from file.\n");
 	}
 }
 
@@ -146,6 +148,7 @@ void importCitationsFile(FILE* ImportFile, Queue* CitationsToProcess, const char
 	char buffer[LINE_SIZE] = ""; // String to store line from file
 	char* readLine; // String to store line to add to node
 
+	// Initialize new citation node to add for each URL
 	Citation* newCitation;
 
 	while (fgets(buffer, LINE_SIZE, ImportFile) != NULL) {
