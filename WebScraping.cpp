@@ -83,14 +83,16 @@ void WebScraping(Citation* citation) {
         if (xpathTitle != NULL) {
             xmlXPathContextPtr xpathCtxtPtr = xmlXPathNewContext(doc);
             xmlXPathObjectPtr xpathObjPtr = xmlXPathEvalExpression(xpathTitle, xpathCtxtPtr);
-            xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
+            if (xpathObjPtr->nodesetval->nodeTab != NULL) {
+                xmlNodePtr node = xpathObjPtr->nodesetval->nodeTab[0];
 
-            // Store title in string
-            char* title = (char*)xmlNodeGetContent(node);
+                // Store title in string
+                char* title = (char*)xmlNodeGetContent(node);
 
-            // Store data if there is no Cloudflare or anti-bot detection
-            if (strcmp(title, "Just a moment...") != 0) {
-                citation->Title = (char*)xmlNodeGetContent(node);
+                // Store data if there is no Cloudflare or anti-bot detection
+                if (strcmp(title, "Just a moment...") != 0) {
+                    citation->Title = (char*)xmlNodeGetContent(node);
+                }
             }
         }
     }
